@@ -1,0 +1,1 @@
+web: gunicorn cogserv.wsgi --log-file -
