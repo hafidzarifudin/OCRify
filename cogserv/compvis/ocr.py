@@ -1,3 +1,8 @@
+from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
+from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
+from msrest.authentication import CognitiveServicesCredentials
+
 from array import array
 import io
 import os
@@ -21,6 +26,7 @@ headers = {
 def sendOCR(image):
     out = io.BytesIO()
     image.save(out, format = image.format)
+
     data = out.getvalue()
     read_response = requests.post(ocr_endpoint, headers=headers, data=data)
     read_response.raise_for_status()
@@ -32,7 +38,9 @@ def sendOCR(image):
     for region in read_response_result['regions']:
         for line in region['lines']:
             for word in line['words']:
-                textbox_result = textbox_result + word['text'] + " "
-    return textbox_result[:-1]
+                print(word['text'])
+                textbox_result = textbox_result + word['text']
+            textbox_result = textbox_result + " "
+        textbox_resul = textbox + "\n"
         
 

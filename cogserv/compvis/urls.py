@@ -1,9 +1,7 @@
 from django.urls import path
-from . import views
+from .views import ocr_api, temp_api
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('ocr', views.ocr_post),
-    path('translate', views.translate_post),
-    path('tts', views.tts_post)
+    path('', ocr_api.urls),
+    path('success/', temp_api.urls, name='success')
 ]
